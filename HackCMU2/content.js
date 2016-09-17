@@ -31,30 +31,80 @@ var all = document.getElementsByTagName("*")
 var max = all.length;
 var elements = new Array(max)
 
+
+/*
+function checkCookie(cname) {
+    var user = getCookie(cname);
+    return user;
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+*/
+
 //Checking for non sans-serif fonts, and replacing them.
 
-for (var i = 0; i < max; i++) {
-    elements[i] = fontProp(all[i],'font-family').toLowerCase()
-    window.console.log(elements[i])
+function changeText() {
+        for (var i = 0; i < max; i++) {
+        elements[i] = fontProp(all[i],'font-family').toLowerCase()
+        window.console.log(elements[i])
 
-    if ($.inArray(elements[i], validfonts) == -1) {
-        window.console.log('Not a valid font.')
-        all[i].style.fontFamily = defaultFont
-    }
+        if ($.inArray(elements[i], validfonts) == -1) {
+            window.console.log('Not a valid font.')
+            all[i].style.fontFamily = defaultFont
+        }
+    } 
 }
+
+chrome.storage.local.get(null, function(items) {
+    if (items.defFont != null) {
+        defaultFont = items.defFont
+        window.console.log(defaultFont + ":Woop there it is")
+    } else window.console.log('Failed!')
+    changeText()
+
+    if (items.ital != null) {
+        if (items.under != null) {
+            changeStyle(items.ital,items.under)
+            window.console.log('Changing both.')
+        }
+        changeStyle(items.ital,false)
+        window.console.log('Changing italics.')
+    } else if (items.under != null) {
+        changeStyle(false,items.under)
+        window.console.log('Changing underline.')
+    } else changeStyle(false,false)
+    window.console.log('Changing neither.')
+});
+
+
+
+
 
 //Performing font style checks, replacing italics w/ alt-font and underlines
 //with highlights.
 
-Array.prototype.forEach.call(document.querySelectorAll("*"), function (element) {
-
+function changeStyle(changeItalics,changeUnderlines) {
+    Array.prototype.forEach.call(document.querySelectorAll("*"), function (element) {
 
     var style = fontProp(element,'font-style')
     var weight = fontProp(element,'font-weight')
     var dec = fontProp(element,'text-decoration')
 
 
-    if (style == "italic") {
+    if (style == "italic" && changeItalics) {
         element.style.fontStyle = 'normal'
         if (element.style.fontFamily = defaultFont) {
             element.style.fontFamily = altFont
@@ -63,11 +113,13 @@ Array.prototype.forEach.call(document.querySelectorAll("*"), function (element) 
 
     }
 
-    if (dec == "underline") {
+    if (dec == "underline" && changeUnderlines) {
         element.style.textDecoration = 'none'
         element.style.backgroundColor = 'yellow'
     }
 });
+}
+
 
 
 //Text-To-Speech

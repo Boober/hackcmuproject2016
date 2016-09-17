@@ -7,12 +7,14 @@
     <h1>Help Panel</h1>
     <button id="sizeUp">Increment Letter Size</button>
     <button id="sizeDown">Decrement Letter Size</button>
-    <select>
-      <option value="TimesNR">Times New Roman</option>
+    <center>Choose Font:</center><select id = "fontSelector">
+      <option value="Times New Roman">Times New Roman</option>
       <option value="Comic Sans MS">Comic Sans MS</option>
       <option value="Verdana">Verdana</option>
       <option value="Arial">Arial</option>
     </select>
+    <input type="checkbox" id="ital" value="italics">Replace Italics<br/>
+    <input type="checkbox" id="under" value="underli">Replace Underline<br/>
     <script src="jquery-3.1.0.js"></script>
     <script src="popup.js"></script>
   </body>
