@@ -73,8 +73,31 @@ Array.prototype.forEach.call(document.querySelectorAll("*"), function (element) 
 var synth = window.speechSynthesis;
 
 $("p").on("click", function(){
-  var utterThis = new SpeechSynthesisUtterance(window.getSelection());
-  synth.speak(utterThis);
+
+  console.log(window.getSelection().toString());
+  if(sessionStorage.getItem("selected")&&window.getSelection().toString())
+  {
+    console.log(sessionStorage.getItem("selected") +window.getSelection().toString());
+    synth.cancel();
+    //sessionStorage.removeItem("selected");
+    synth.speak(new SpeechSynthesisUtterance(window.getSelection()));
+  }
+  else if(sessionStorage.getItem("selected")&&!window.getSelection().toString())
+  {
+    console.log('clear cache');
+    sessionStorage.removeItem("selected");
+    synth.cancel();
+  }
+  else if(!sessionStorage.getItem("selected")&&window.getSelection().toString()){
+    console.log('not selected');
+    sessionStorage.setItem("selected","yes");
+    var utterThis = new SpeechSynthesisUtterance(window.getSelection());
+    synth.speak(utterThis);
+  }
+  else
+  {
+    console.log('nothing');
+  }
 });
 
 window.onunload = function(){
