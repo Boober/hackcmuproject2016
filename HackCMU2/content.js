@@ -87,6 +87,7 @@ window.onunload = function(){
 
 /***The size changes seem to be really exaggerated for some websites.***/
 
+/*
 $(document).ready(function()
 	{
 	//set the font size
@@ -104,3 +105,9 @@ $(document).ready(function()
 	}
 	});
 	
+*/
+
+$(document).ready(function() {
+    $('p').css('text-align', 'left')
+})
+
