@@ -1,28 +1,27 @@
 
 var validfonts = [
-'Agency FB','Akzidenz-Grotesk','Andalé Sans','Antique Olive','Arial',
-'Arial Unicode MS','Avant Garde Gothic','Avenir','Bank Gothic','Bauhaus',
-'Bell Centennial','Bell Gothic','Benguiat Gothic','Berlin Sans',
-'Brandon Grotesque','Calibri','Casey','Century Gothic','Charcoal','Chicago',
-'Clearview','Comic Sans','Compacta','Corbel','DejaVu Sans','DIN','Dotum',
-'Droid Sans','Dyslexie','Ecofont','Eras','Espy Sans','Eurocrat','Eurostile',
-'Square 721','FF Dax','FF Meta','FF Scala Sans','Fira Sans','Folio',
-'Franklin Gothic','FreeSans','Frutiger','Futura','Geneva','Gill Sans',
-'Gill Sans Schoolbook','Gotham','Haettenschweiler','Handel Gothic','Hei',
-'Helvetica','Helvetica Neue','Swiss 721','Highway Gothic','Hobo','Impact',
-'Industria','Interstate','Johnston/New Johnston','Kabel','Klavika',
-'Lexia Readable','Liberation Sans','Linux Biolinum','Lucida Sans',
-'Lucida Grande','Lucida Sans Unicode','Lydian','Meiryo','Meta','Microgramma',
-'Modern','Motorway','MS Sans Serif','Myriad','Neutraface','Neuzeit S',
-'News Gothic','Nimbus Sans L','Open Sans','Optima','Parisine','Product Sans',
-'Proxima Nova','PT Sans','Rail Alphabet','Roboto','Rotis Sans','Segoe UI',
-'Skia','Source Sans Pro','Sweden Sans','Syntax','Tahoma','Template Gothic',
-'Thesis Sans','Tiresias','Trade Gothic','Transport','Trebuchet MS',
-'Twentieth Century','Ubuntu','Univers','Zurich','Vera Sans','Verdana']
+'agency fb','akzidenz-grotesk','andalé sans','antique olive','arial',
+'arial unicode ms','avant garde gothic','avenir','bank gothic','bauhaus',
+'bell centennial','bell gothic','benguiat gothic','berlin sans',
+'brandon grotesque','calibri','casey','century gothic','charcoal','chicago',
+'clearview','comic sans','compacta','corbel','dejavu sans','din','dotum',
+'droid sans','dyslexie','ecofont','eras','espy sans','eurocrat','eurostile',
+'square 721','ff dax','ff meta','ff scala sans','fira sans','folio',
+'franklin gothic','freesans','frutiger','futura','geneva','gill sans',
+'gill sans schoolbook','gotham','haettenschweiler','handel gothic','hei',
+'helvetica','helvetica neue','swiss 721','highway gothic','hobo','impact',
+'industria','interstate','johnston/new johnston','kabel','klavika',
+'lexia readable','liberation sans','linux biolinum','lucida sans',
+'lucida grande','lucida sans unicode','lydian','meiryo','meta','microgramma',
+'modern','motorway','ms sans serif','myriad','neutraface','neuzeit s',
+'news gothic','nimbus sans l','open sans','optima','parisine','product sans',
+'proxima nova','pt sans','rail alphabet','roboto','rotis sans','segoe ui',
+'skia','source sans pro','sweden sans','syntax','tahoma','template gothic',
+'thesis sans','tiresias','trade gothic','transport','trebuchet ms',
+'twentieth century','ubuntu','univers','zurich','vera sans','verdana']
 
 var defaultFont = 'Verdana'       //Possibly changeable by the user.
-var altFont = 'Times New Roman'   //Also possibly changeable by user. (Make sure it's at least different than the primary.)
-
+var altFont = 'Arial'   //Also possibly changeable by user. (Make sure it's at least different than the primary.)
 
 function fontProp( element, property ) {
     return window.getComputedStyle( element, null ).getPropertyValue( property )
@@ -35,8 +34,11 @@ var elements = new Array(max)
 //Checking for non sans-serif fonts, and replacing them.
 
 for (var i = 0; i < max; i++) {
-    elements[i] = fontProp(all[i],'font-family')
+    elements[i] = fontProp(all[i],'font-family').toLowerCase()
+    window.console.log(elements[i])
+
     if ($.inArray(elements[i], validfonts) == -1) {
+        window.console.log('Not a valid font.')
         all[i].style.fontFamily = defaultFont
     }
 }
@@ -88,6 +90,7 @@ window.onunload = function(){
 /***The size changes seem to be really exaggerated for some websites.***/
 
 /*
+
 $(document).ready(function()
 	{
 	//set the font size
@@ -104,7 +107,6 @@ $(document).ready(function()
 		$(x[c]).css({'font-size' : currSize+(currSize/3)});
 	}
 	});
-	
 */
 
 $(document).ready(function() {
