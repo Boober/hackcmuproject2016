@@ -1,3 +1,3 @@
 $(document).ready(function() {
-    $('p').style.textAlign('left')
+    $('p').style.textAlign('right')
 })
