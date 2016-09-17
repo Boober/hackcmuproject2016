@@ -160,26 +160,23 @@ chrome.runtime.onMessage.addListener(function (message,sender,anon){
 
 /***The size changes seem to be really exaggerated for some websites.***/
 
-/*
+
 
 $(document).ready(function()
 	{
-	//set the font size
-	var x = $('p,div,span,h1,h2,h3,h4,h5,h6');
-
+	//incease the font size of all elements
+	var x = $('*');
 	for (c in x)
 	{
 	var currSize = parseInt($(x[c]).css('font-size'));
 
 	console.log(currSize);
-	if (currSize < 12)
-		$(x[c]).css({'font-size' : 12});
+
+	if (currSize < 9)
+		$(x[c]).css({'font-size' : 9});
 	else
-		$(x[c]).css({'font-size' : currSize+(currSize/3)});
+		$(x[c]).css({'font-size' : currSize+2}); //add 2 or 1
+
 	}
 	});
-*/
 
-$(document).ready(function() {
-    $('p').css('text-align', 'left')
-})
