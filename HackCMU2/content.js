@@ -162,7 +162,7 @@ chrome.runtime.onMessage.addListener(function (message,sender,anon){
 
 
 
-$(document).ready(function()
+/* $(document).ready(function()
 	{
 	//incease the font size of all elements
 	var x = $('*');
@@ -178,7 +178,7 @@ $(document).ready(function()
 		$(x[c]).css({'font-size' : currSize+2}); //add 2 or 1
 
 	}
-	});
+	}); */
 
 function rgb2hex(rgb){
     rgb = rgb.match(/\d+/g);
