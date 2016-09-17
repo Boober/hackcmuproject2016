@@ -55,12 +55,12 @@ Array.prototype.forEach.call(document.querySelectorAll("*"), function (element) 
 
 
     if (style == "italic") {
-        element.style.fontStyle = 'normal' 
+        element.style.fontStyle = 'normal'
         if (element.style.fontFamily = defaultFont) {
             element.style.fontFamily = altFont
-             
+
         } else element.style.fontFamily = defaultFont
-           
+
     }
 
     if (dec == "underline") {
@@ -75,7 +75,7 @@ Array.prototype.forEach.call(document.querySelectorAll("*"), function (element) 
 var synth = window.speechSynthesis;
 
 $("p").on("click", function(){
-  var utterThis = new SpeechSynthesisUtterance($(this).text());
+  var utterThis = new SpeechSynthesisUtterance(window.getSelection());
   synth.speak(utterThis);
 });
 
@@ -83,6 +83,24 @@ window.onunload = function(){
   console.log("hello");
   synth.cancel();
 };
+
+var anon = function() {};
+chrome.runtime.onMessage.addListener(function (message,sender,anon){
+  console.log("halo");
+  if(!!message.size)
+  {
+
+    var fsize = parseInt($("*").css("font-size"));
+    fontSize = fsize + message.size + "px";
+    $("*").css({'font-size':fontSize})
+  }
+  if(!!message.font)
+  {
+    var fon = message.font + ", "+"sans-serif";
+    $("*").css({'font-family': fon});
+  }
+});
+
 
 
 //Setting Minimum Font-Size
@@ -95,11 +113,11 @@ $(document).ready(function()
 	{
 	//set the font size
 	var x = $('p,div,span,h1,h2,h3,h4,h5,h6');
-	
+
 	for (c in x)
 	{
 	var currSize = parseInt($(x[c]).css('font-size'));
-	
+
 	console.log(currSize);
 	if (currSize < 12)
 		$(x[c]).css({'font-size' : 12});
@@ -112,4 +130,3 @@ $(document).ready(function()
 $(document).ready(function() {
     $('p').css('text-align', 'left')
 })
-

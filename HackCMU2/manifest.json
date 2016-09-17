@@ -2,15 +2,18 @@
   "manifest_version": 2,
   "name": "My Cool Extension",
   "version": "0.1",
+  
   "content_scripts": [
     {
       "matches": [
         "<all_urls>"
       ],
-      "js": ["jquery-3.1.0.js", "content.js"]
+      "js": ["jquery-3.1.0.js", "content.js", "popup.js"]
     }
   ],
   "browser_action": {
-    "default_icon": "icon.png"
-  }
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["tabs"]
 }
