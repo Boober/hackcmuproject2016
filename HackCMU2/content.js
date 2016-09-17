@@ -10,7 +10,7 @@ $(document).ready(function()
 	if (currSize < 9)
 		$(x[c]).css({'font-size' : 9});
 	else
-		$(x[c]).css({'font-size' : currSize+2});
+		$(x[c]).css({'font-size' : currSize+2}); //add 2 or 1
 
 	}
 	});
