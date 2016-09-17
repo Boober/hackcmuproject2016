@@ -161,7 +161,7 @@ chrome.runtime.onMessage.addListener(function (message,sender,anon){
 /***The size changes seem to be really exaggerated for some websites.***/
 
 
-
+/*
 $(document).ready(function()
 	{
 	//incease the font size of all elements
@@ -179,6 +179,8 @@ $(document).ready(function()
 
 	}
 	});
+
+*/
 
 function rgb2hex(rgb){
     rgb = rgb.match(/\d+/g);
